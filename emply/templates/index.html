@@ -5,11 +5,14 @@
   <title>Library Store</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class='bg-light'>
 
 <div class="container py-4">
-  <h2 class="mb-4 text-center">Book List</h2>
-  <a href="{% url 'add'%}" class="btn btn-success mb-3">+ Add New Book</a>
+  <h2 class="mb-4 text-center">Employee List</h2>
+  <a href="{% url 'add'%}" class="btn btn-success mb-3">+ Add Employee</a>
+
+  <input type="text" id="searchInput" class="form-control mb-4" placeholder="Search by name, occupation, or gender...">
+
   <div class="row">
 
     {% for emp in page_obj %}
@@ -17,7 +20,8 @@
 
 
     <!-- Book 2 -->
-    <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4 emp-card">
+
       <div class="card h-100">
         
         <div class="card-body">
@@ -67,6 +71,47 @@
   </ul>
 </nav>
 
+{% comment %} <nav>
+  <ul class="pagination justify-content-center">
+
+    <li class="page-item">
+      <a class="page-link" href="?page=1"> First</a>
+    </li>
+
+    <li class="page-item active">
+      <a class="page-link" href="#">{{ page_obj.number }}</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last </a>
+    </li>
+
+  </ul>
+</nav> {% endcomment %}
+
+<script>
+  document.getElementById("searchInput").addEventListener("keyup", function () {
+    const searchValue = this.value.toLowerCase();
+    const cards = document.querySelectorAll(".emp-card");
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      if (text.includes(searchValue)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+</script>
 
 
 

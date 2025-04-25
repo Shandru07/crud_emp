@@ -25,16 +25,18 @@ def add_emp(request):
         form = EmployeForm()
     return render(request, 'form_emp.html', {'form': form, 'title': 'Add Employee'})
 
-def up_emp(request,pk):
-    emp = get_object_or_404(Employe,pk=pk)
+def up_emp(request, pk):
+    emp = get_object_or_404(Employe, pk=pk)
     if request.method == 'POST':
-            form = EmployeForm(request.POST,request.FILES,instance=emp)
-            if form.is_valid():
-                form.save()
+        form = EmployeForm(request.POST, request.FILES, instance=emp)
+        if form.is_valid():
+            emp = form.save(commit=False)  # Prevents saving immediately
+            emp.save()  # Triggers your custom salary calculation
             return redirect('index')
     else:
-            form = EmployeForm(instance=emp)
+        form = EmployeForm(instance=emp)
     return render(request, 'form_emp.html', {'form': form, 'title': 'Update Employee'})
+
 
 
 def dlt_emp(request,pk):

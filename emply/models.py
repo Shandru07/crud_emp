@@ -14,5 +14,15 @@ class Employe(models.Model):
     leave_taken = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        per_day = self.allocated_salary / 30
+        self.current_salary = self.allocated_salary - (per_day * self.leave_taken)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
+
+    
+
+
+

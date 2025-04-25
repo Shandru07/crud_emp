@@ -75,8 +75,14 @@ WSGI_APPLICATION = 'mngmt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+      
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Employees',  # Your PostgreSQL database name
+        'USER': 'postgres',  # Your PostgreSQL username
+        'PASSWORD': 'chandru2002',  # Your PostgreSQL password
+        'HOST': 'localhost',  # Host for PostgreSQL (usually 'localhost')
+        'PORT': '5432',  # Default PostgreSQL port
+
     }
 }
 
